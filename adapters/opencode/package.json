@@ -1,0 +1,16 @@
+{
+  "name": "solosprint-adapter-opencode",
+  "version": "0.1.0",
+  "description": "The reference SoloSprint Conveyor adapter: runs conveyor role sessions on OpenCode",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "solosprint-adapter-opencode": "src/main.ts"
+  },
+  "engines": {
+    "node": ">=26"
+  },
+  "dependencies": {
+    "@opencode/sdk": "^2.3.2"
+  }
+}

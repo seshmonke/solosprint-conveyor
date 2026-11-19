@@ -47,8 +47,8 @@ the session journal. The contract defines three shapes:
 ```ts
 type AdapterEvent =
   | { type: 'progress'; text: string }        // one feed line
-  | { type: 'limits'; value: unknown }        // optional provider limit info
-  | {
+  | { type: 'limits'; resetsAt?: number | null }  // optional: the provider
+  | {                                         // limit reset time, ms Unix
       type: 'result';
       ok: boolean;
       session: string | null;
