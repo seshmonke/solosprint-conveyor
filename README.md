@@ -85,10 +85,10 @@ sensible defaults apply.
 
 The conveyor speaks to an agent through the
 [adapter contract](docs/adapter-contract.md). Install the reference adapter
-and tell the conveyor where it is:
+from this checkout and tell the conveyor where it is:
 
 ```bash
-npm install -g solosprint-adapter-opencode
+npm install -g ./adapters/opencode
 SOLOSPRINT_AGENT_BIN=solosprint-adapter-opencode solosprint-conveyor start 42
 ```
 
