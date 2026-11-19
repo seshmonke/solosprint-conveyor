@@ -86,7 +86,7 @@ export async function serveChecks() {
             throw new Error(`A server did not come up, journals ${names}`);
         }
         if (instance.checksServe.intro)
-            console.log(`\n${instance.checksServe.intro}\n`);
+            console.log(`\n${instance.checksServe.intro.replaceAll('{LAN}', lanAddress())}\n`);
         console.log(`Home network address for a phone: ${lanAddress()}. Result — solosprint-conveyor check N ok | "remarks". End the serving — Ctrl+C.`);
         await new Promise((resolve) => {
             process.once('SIGINT', resolve);

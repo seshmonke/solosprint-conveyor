@@ -1,6 +1,6 @@
 {
   "name": "solosprint-conveyor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Methodology and reference implementation: a solo project run as numbered sprints executed by a pipeline of agent roles, provider-agnostic via an adapter contract",
   "type": "module",
   "license": "MIT",

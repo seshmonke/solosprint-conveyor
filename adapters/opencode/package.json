@@ -1,6 +1,6 @@
 {
   "name": "solosprint-adapter-opencode",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The reference SoloSprint Conveyor adapter: runs conveyor role sessions on OpenCode",
   "type": "module",
   "license": "MIT",

@@ -34,13 +34,36 @@ const sprintFile = () => {
         return join(dir, `${prefix}stub.md`);
     return join(dir, found[0]);
 };
+/** The instance dialect from `.solosprint.json`, with the canon defaults. */
+const dialect = (() => {
+    const file = join(cwd, '.solosprint.json');
+    try {
+        const config = JSON.parse(readFileSync(file, 'utf8'));
+        return {
+            goal: config.headings?.['goal'] ?? 'Goal:',
+            tasks: config.headings?.['tasks'] ?? '## Tasks',
+            ownerChecks: config.headings?.['ownerChecks'] ?? '## Owner checks',
+            retro: config.headings?.['retro'] ?? '## Retro',
+            closed: config.headings?.['closed'] ?? 'Closed ',
+        };
+    }
+    catch {
+        return {
+            goal: 'Goal:',
+            tasks: '## Tasks',
+            ownerChecks: '## Owner checks',
+            retro: '## Retro',
+            closed: 'Closed ',
+        };
+    }
+})();
 /** The planner writes the sprint file and the index line, docs only. */
 const plannerWork = () => {
     const dir = join(cwd, 'docs', 'tasks');
     mkdirSync(dir, { recursive: true });
     const file = sprintFile();
     if (!existsSync(file)) {
-        writeFileSync(file, `### Sprint ${sprint}: stub composition\n\nGoal: the stub proves the cycle works.\n\n## Tasks\n\n- [ ] Task one\n- [ ] Task two\n\n## Owner checks\n\n- [ ] A hands-on check\n`);
+        writeFileSync(file, `### Sprint ${sprint}: stub composition\n\n${dialect.goal} the stub proves the cycle works.\n\n${dialect.tasks}\n\n- [ ] Task one\n- [ ] Task two\n\n${dialect.ownerChecks}\n\n- [ ] A hands-on check\n`);
     }
     const index = join(dir, 'INDEX.md');
     const current = existsSync(index) ? readFileSync(index, 'utf8') : '# Sprints\n\n## Sprints\n';
@@ -59,7 +82,7 @@ const implementerWork = () => {
 const closerWork = () => {
     const file = sprintFile();
     const text = readFileSync(file, 'utf8');
-    writeFileSync(file, `${text.trimEnd()}\n\n## Retro\n\nClosed ${new Date().toLocaleDateString('en-GB')}. Stub run: all phases passed.\n`);
+    writeFileSync(file, `${text.trimEnd()}\n\n${dialect.retro}\n\n${dialect.closed}${new Date().toLocaleDateString('en-GB')}. Stub run: all phases passed.\n`);
     commit(cwd, `Sprint ${sprint} closed (stub)`);
 };
 const readStdin = () => new Promise((resolve) => {

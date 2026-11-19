@@ -42,6 +42,31 @@ const sprintFile = (): string => {
   return join(dir, found[0] as string);
 };
 
+/** The instance dialect from `.solosprint.json`, with the canon defaults. */
+const dialect = (() => {
+  const file = join(cwd, '.solosprint.json');
+  try {
+    const config = JSON.parse(readFileSync(file, 'utf8')) as {
+      headings?: Record<string, string>;
+    };
+    return {
+      goal: config.headings?.['goal'] ?? 'Goal:',
+      tasks: config.headings?.['tasks'] ?? '## Tasks',
+      ownerChecks: config.headings?.['ownerChecks'] ?? '## Owner checks',
+      retro: config.headings?.['retro'] ?? '## Retro',
+      closed: config.headings?.['closed'] ?? 'Closed ',
+    };
+  } catch {
+    return {
+      goal: 'Goal:',
+      tasks: '## Tasks',
+      ownerChecks: '## Owner checks',
+      retro: '## Retro',
+      closed: 'Closed ',
+    };
+  }
+})();
+
 /** The planner writes the sprint file and the index line, docs only. */
 const plannerWork = () => {
   const dir = join(cwd, 'docs', 'tasks');
@@ -50,7 +75,7 @@ const plannerWork = () => {
   if (!existsSync(file)) {
     writeFileSync(
       file,
-      `### Sprint ${sprint}: stub composition\n\nGoal: the stub proves the cycle works.\n\n## Tasks\n\n- [ ] Task one\n- [ ] Task two\n\n## Owner checks\n\n- [ ] A hands-on check\n`,
+      `### Sprint ${sprint}: stub composition\n\n${dialect.goal} the stub proves the cycle works.\n\n${dialect.tasks}\n\n- [ ] Task one\n- [ ] Task two\n\n${dialect.ownerChecks}\n\n- [ ] A hands-on check\n`,
     );
   }
   const index = join(dir, 'INDEX.md');
@@ -76,7 +101,7 @@ const closerWork = () => {
   const text = readFileSync(file, 'utf8');
   writeFileSync(
     file,
-    `${text.trimEnd()}\n\n## Retro\n\nClosed ${new Date().toLocaleDateString('en-GB')}. Stub run: all phases passed.\n`,
+    `${text.trimEnd()}\n\n${dialect.retro}\n\n${dialect.closed}${new Date().toLocaleDateString('en-GB')}. Stub run: all phases passed.\n`,
   );
   commit(cwd, `Sprint ${sprint} closed (stub)`);
 };
