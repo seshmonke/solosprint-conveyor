@@ -119,6 +119,34 @@ tmux new-session -d -s conveyor -c ~/project 'solosprint-conveyor start 42; exec
 tmux attach -t conveyor   # watch; detach with Ctrl+B, D
 ```
 
+## Quick start for a new project
+
+Paste this prompt into your coding agent to wire the conveyor into a
+project:
+
+> Integrate SoloSprint Conveyor (`github:seshmonke/solosprint-conveyor#v0.1.0`)
+> into this project. Read its `README.md` and `docs/conveyor.md` first, then
+> `docs/instance-config.md` for the config schema.
+>
+> 1. Add the conveyor as a git dependency pinned to the tag.
+> 2. Create `.solosprint.json` in the project root, adapted to this project:
+>    where the sprint files will live, the rules files every role reads
+>    first, the direction/backlog/index files (create them under the tasks
+>    directory if they do not exist), the sprint-file dialect, the ports the
+>    e2e gate uses, and the owner-check serving steps when the project has
+>    something to serve.
+> 3. Touch only the conveyor wiring: `package.json`, `.solosprint.json`, the
+>    new tasks files, and `.solosprint/` in `.gitignore`. Do not change the
+>    project's code or product documentation.
+> 4. Run a trial with the stub on a **copy** of the repository: point
+>    `SOLOSPRINT_AGENT_BIN` at the conveyor's `adapters/stub/stub.ts`, set
+>    `SOLOSPRINT_GATE` to a harmless command, and run
+>    `solosprint-conveyor start`. The whole cycle must finish with
+>    "Sprint 1 closed and pushed" against a scratch remote.
+> 5. Report: what you configured, the trial result, and what remains for the
+>    owner — a real adapter with a provider, the notifier command, and the
+>    tmux line.
+
 ## License
 
 MIT. Copyright (c) 2026 seshmonke. See [LICENSE](LICENSE).
