@@ -408,14 +408,17 @@ description: Конвейер спринтов — исполняет цикл �
 
 Состав скиллов, на который опирается конвейер в опорном проекте
 (toodoo/clout-cloud): проектный скилл и глобальные скиллы
-fullstack/devsecops, доступные сессиям проекта. Роль подключает скилл,
-когда работа попадает в его зону; оркестратор передаёт имя скилла
-субагенту явно, а не надеется на триггер по описанию.
+fullstack/devsecops, доступные сессиям проекта (в опорном проекте живут в
+`~/.agents/skills/`). Роль подключает скилл, когда работа попадает в его
+зону; оркестратор передаёт имя скилла субагенту явно, а не надеется на
+триггер по описанию.
 
 ### Проектный скилл (обязателен)
 
 - **conveyor** — этот скилл: оркестрация цикла, роли, гейты. Без него
-  конвейера нет.
+  конвейера нет. Установка — копией папки `.opencode/skill/conveyor/` из
+  [seshmonke/solosprint-conveyor](https://github.com/seshmonke/solosprint-conveyor)
+  в проект.
 
 ### Fullstack
 
@@ -423,20 +426,29 @@ fullstack/devsecops, доступные сессиям проекта. Роль 
   вариантов, схемы, зависимости. Зона: на анализе перед стартом или на
   реализации всплыла задача уровня концепции — до вопроса владельцу
   свериться, есть ли стандартное решение. Требование: результат
-  фиксируется в чистовике по методологии документации.
+  фиксируется в чистовике по методологии документации. Репо:
+  [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills)
+  (`engineering-team/senior-architect/`).
 - **frontend-design** — визуальное направление новых экранов и
   компонентов. Зона: реализатор перед новым интерфейсом; показ — в
-  очередь проверок владельца.
+  очередь проверок владельца. Репо:
+  [anthropics/skills](https://github.com/anthropics/skills).
 - **web-design-guidelines** — ревью UI против Web Interface Guidelines
   (доступность, тач-таргеты, формы). Зона: приёмщик по интерфейсным
-  задачам; находки — задачами в бэклог, как обычно.
+  задачам; находки — задачами в бэклог, как обычно. Репо:
+  [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills).
 - **docker-development** — Dockerfile, compose, многостадийные сборки,
   безопасность контейнеров. Зона: любая правка `compose.yaml`,
-  Dockerfile, деплойной инфраструктуры.
+  Dockerfile, деплойной инфраструктуры. Репо:
+  [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills)
+  (`engineering/docker-development/`).
 - **define-goal** — формулировка измеримой цели. Зона: владелец просит
-  поставить цель; цикл спринта без него не держится.
+  поставить цель; цикл спринта без него не держится. Репо:
+  [openai/skills](https://github.com/openai/skills)
+  (`skills/.curated/define-goal/`).
 - **balanced** — конструктивный критический разбор плана, состава или
-  решения. Зона: по запросу владельца; цикл без него не держится.
+  решения. Зона: по запросу владельца; цикл без него не держится. Репо:
+  [glebis/claude-skills](https://github.com/glebis/claude-skills).
 
 ### DevSecOps и безопасность
 
@@ -444,37 +456,61 @@ fullstack/devsecops, доступные сессиям проекта. Роль 
   границы, активы, возможности атакующего, пути атак, смягчения; итог —
   markdown-документ. Зона: анализ перед стартом задач авторизации,
   хранения данных, сетевых ручек — до кода. Только по явному запросу
-  владельца.
+  владельца. Репо: [openai/skills](https://github.com/openai/skills)
+  (`skills/.curated/security-threat-model/`).
 - **security-best-practices** — ревью безопасных практик по языку и
   фреймворку. Только python, javascript/typescript, go — в опорном
   проекте покрывает ts-код. Зона: приёмка security-чувствительных
-  спринтов. Только по явному запросу владельца.
+  спринтов. Только по явному запросу владельца. Репо:
+  [openai/skills](https://github.com/openai/skills)
+  (`skills/.curated/security-best-practices/`).
 - **codeql** — статический анализ с межпроцедурным потоком данных и
   taint-трекингом; требует сборки CodeQL-базы пакетов. Режимы:
   «важное только» (high-precision) и «всё» (security-and-quality +
-  security-experimental).
+  security-experimental). Репо:
+  [trailofbits/skills](https://github.com/trailofbits/skills)
+  (`plugins/static-analysis/skills/codeql/`).
 - **semgrep** — статический анализ; с Semgrep Pro — межфайловый taint.
-  Режимы: «important only» и «run all».
+  Режимы: «important only» и «run all». Репо:
+  [trailofbits/skills](https://github.com/trailofbits/skills)
+  (`plugins/static-analysis/skills/semgrep/`).
 - **sarif-parsing** — разбор, фильтрация и дедупликация SARIF от
   codeql/semgrep, интеграция в CI. Сам не сканирует — пара к двум
-  предыдущим.
+  предыдущим. Репо:
+  [trailofbits/skills](https://github.com/trailofbits/skills)
+  (`plugins/static-analysis/skills/sarif-parsing/`).
 - **security-ownership-map** — карта владения чувствительным кодом по
-  git-истории, bus factor. Зона: по явному запросу владельца.
+  git-истории, bus factor. Зона: по явному запросу владельца. Репо:
+  [openai/skills](https://github.com/openai/skills)
+  (`skills/.curated/security-ownership-map/`).
 
 ### GitHub и CI
 
 - **gh-fix-ci** — разбор красных проверок GitHub Actions через `gh`.
   Зона: красный ран после пуша — закрывающий зовёт скилл или чинит по
-  правилам проекта. Требование: `gh` установлен и авторизован.
+  правилам проекта. Требование: `gh` установлен и авторизован. Репо:
+  [openai/skills](https://github.com/openai/skills)
+  (`skills/.curated/gh-fix-ci/`).
 - **gh-address-comments** — отработка комментариев ревью на открытом PR
   через `gh`. Зона: по команде владельца. Требование: `gh`
-  авторизован.
+  авторизован. Репо: [openai/skills](https://github.com/openai/skills)
+  (`skills/.curated/gh-address-comments/`).
 
 ### Вне зоны конвейера
 
-grilling (стресс-тест плана), copywriting и ogilvy-copywriting
-(маркетинговые тексты), harry (стиль речи) — цикл на них не опирается,
-подключаются только по запросу владельца.
+- **grilling** (стресс-тест плана) —
+  [mattpocock/skills](https://github.com/mattpocock/skills)
+  (`skills/productivity/grilling/`).
+- **copywriting** —
+  [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+  (`skills/copywriting/`).
+- **ogilvy-copywriting** —
+  [boraoztunc/skills](https://github.com/boraoztunc/skills) (`ogilvy/`).
+- **harry** (стиль речи) — свой скилл проекта, апстрим-репо нет:
+  переносится из локального набора скиллов.
+
+Цикл на эти четыре скилла не опирается, подключаются только по запросу
+владельца.
 
 ### Правила компоновки
 
@@ -488,6 +524,37 @@ grilling (стресс-тест плана), copywriting и ogilvy-copywriting
 - Скилл из состава в проекте отсутствует или сломан — не выдумывать
   замену: работать по правилам проекта и отметить владельцу (то же
   правило, что для любых правил).
+
+### Откуда ставить
+
+Бандл собирается из девяти репозиториев. Стандартная установка скилла —
+`npx skills add <репо> --skill <имя>` (или копированием папки скилла в
+`.agents/skills/`, как в опорном проекте):
+
+- [openai/skills](https://github.com/openai/skills) — define-goal,
+  gh-address-comments, gh-fix-ci, security-best-practices,
+  security-ownership-map, security-threat-model (`skills/.curated/`);
+- [trailofbits/skills](https://github.com/trailofbits/skills) — codeql,
+  semgrep, sarif-parsing (`plugins/static-analysis/skills/`);
+- [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills)
+  — senior-architect (`engineering-team/`), docker-development
+  (`engineering/docker-development/`);
+- [anthropics/skills](https://github.com/anthropics/skills) —
+  frontend-design;
+- [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) —
+  web-design-guidelines;
+- [glebis/claude-skills](https://github.com/glebis/claude-skills) —
+  balanced;
+- [mattpocock/skills](https://github.com/mattpocock/skills) — grilling
+  (`skills/productivity/grilling/`);
+- [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+  — copywriting (`skills/copywriting/`);
+- [boraoztunc/skills](https://github.com/boraoztunc/skills) —
+  ogilvy-copywriting (`ogilvy/`).
+
+Сам конвейер — этот репозиторий: `cp -r .opencode/skill/conveyor
+<проект>/.opencode/skill/`. harry — без апстрима, переносится из
+локального набора.
 
 ## Автономный запуск
 

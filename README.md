@@ -45,6 +45,34 @@ cp -r .opencode/skill/conveyor <проект>/.opencode/skill/
 
 Нет правил — конвейер спрашивает владельца, а не выдумывает.
 
+## Откуда ставить скиллы из состава
+
+`npx skills add <репо> --skill <имя>` (или копированием папки скилла в
+`.agents/skills/`):
+
+- [openai/skills](https://github.com/openai/skills) — define-goal,
+  gh-address-comments, gh-fix-ci, security-best-practices,
+  security-ownership-map, security-threat-model (`skills/.curated/`);
+- [trailofbits/skills](https://github.com/trailofbits/skills) — codeql,
+  semgrep, sarif-parsing (`plugins/static-analysis/skills/`);
+- [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills)
+  — senior-architect (`engineering-team/`), docker-development
+  (`engineering/docker-development/`);
+- [anthropics/skills](https://github.com/anthropics/skills) —
+  frontend-design;
+- [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) —
+  web-design-guidelines;
+- [glebis/claude-skills](https://github.com/glebis/claude-skills) —
+  balanced;
+- [mattpocock/skills](https://github.com/mattpocock/skills) — grilling
+  (`skills/productivity/grilling/`);
+- [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+  — copywriting (`skills/copywriting/`);
+- [boraoztunc/skills](https://github.com/boraoztunc/skills) —
+  ogilvy-copywriting (`ogilvy/`).
+
+harry — свой скилл, апстрим-репо нет: переносится из локального набора.
+
 ## Лицензия
 
 [MIT](LICENSE)
