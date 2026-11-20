@@ -69,9 +69,9 @@ cp -r .opencode/skill/conveyor <проект>/.opencode/skill/
 - [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
   — copywriting (`skills/copywriting/`);
 - [boraoztunc/skills](https://github.com/boraoztunc/skills) —
-  ogilvy-copywriting (`ogilvy/`).
-
-harry — свой скилл, апстрим-репо нет: переносится из локального набора.
+  ogilvy-copywriting (`ogilvy/`);
+- [seshmonke/harry-skill](https://github.com/seshmonke/harry-skill) —
+  harry.
 
 ## Лицензия
 

@@ -506,8 +506,8 @@ fullstack/devsecops, доступные сессиям проекта (в опо
   (`skills/copywriting/`).
 - **ogilvy-copywriting** —
   [boraoztunc/skills](https://github.com/boraoztunc/skills) (`ogilvy/`).
-- **harry** (стиль речи) — свой скилл проекта, апстрим-репо нет:
-  переносится из локального набора скиллов.
+- **harry** (стиль речи, Гарри Дюбуа из Disco Elysium) —
+  [seshmonke/harry-skill](https://github.com/seshmonke/harry-skill).
 
 Цикл на эти четыре скилла не опирается, подключаются только по запросу
 владельца.
@@ -550,11 +550,12 @@ fullstack/devsecops, доступные сессиям проекта (в опо
 - [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
   — copywriting (`skills/copywriting/`);
 - [boraoztunc/skills](https://github.com/boraoztunc/skills) —
-  ogilvy-copywriting (`ogilvy/`).
+  ogilvy-copywriting (`ogilvy/`);
+- [seshmonke/harry-skill](https://github.com/seshmonke/harry-skill) —
+  harry.
 
 Сам конвейер — этот репозиторий: `cp -r .opencode/skill/conveyor
-<проект>/.opencode/skill/`. harry — без апстрима, переносится из
-локального набора.
+<проект>/.opencode/skill/`.
 
 ## Автономный запуск
 
